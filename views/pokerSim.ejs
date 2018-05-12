@@ -1,0 +1,379 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <title>Ramapo Poker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body style="background-color:#367520;">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/">Ramapo Poker Tournament</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pokerTable">Play Poker</a>
+          </li>
+          <li class="nav-item active">
+                <a class="nav-link" href="/pokerSim">Play Computer</a>
+            </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/howTo">How to play</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" style="background-color:#367520;">
+    <div id="waitingRoom" style="padding-top:75px;"><h2>Waiting for an open table!</h2> </div>
+      <div class="container" id="gameBoard" style="padding-top:75px;">
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
+                <div id="player2">
+                    <div class="card" style="width:100%;">
+                       <div id="playingCards">
+                            <img style="height:125px"/>
+                       </div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="playerName"></h5>
+                            <p class="card-text" id="playerChips"></p>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="col-md-3">
+                <div id="player3">
+                    <div class="card" style="width:100%;">
+                       <div id="playingCards">
+                            <img style="height:125px"/>
+                       </div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="playerName"></h5>
+                            <p class="card-text" id="playerChips"></p>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                    <div id="player1">
+                        <div class="card" style="width:100%;">
+                            <div id="playingCards">
+                                    <img style="height:125px"/>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="playerName"></h5>
+                                <p class="card-text" id="playerChips"></p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-6" style="border: black solid 15px; border-radius:50px;">
+                    <div id="table">
+                        <div id="tableCards">
+                        </div>
+                        <div id="tablePot">
+                            
+                        </div>
+                        <div class="alert alert-info" id="messageBox">
+                                Weclome to Ramapo Poker Tournament!
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                    <div id="player4">
+                        <div class="card" style="width:100%;">
+                            <div id="playingCards">
+                                <img style="height:125px"/>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="playerName"></h5>
+                                <p class="card-text" id="playerChips"></p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                    <div id="currentPlayer">
+                        <div class="card" style="width:100%;">
+                            <div id="playerCards"></div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="playerName"></h5>
+                                <p class="card-text" id="playerChips"></p>
+                                <div class="form-group" id="playerNameForm">
+                                    <label for="playerName">Player Name:</label>
+                                    <input type="text" id="playerNameInput" name="name">
+                                    <br/>
+                                    <label for="numComps">Number of Computers:</label>
+                                    <input type="number" id="numComps" step="1">
+                                </div>
+                                <button id="readyBtn" class="btn btn-info"> Ready to Play </button>
+                                    <button id="playAgainBtn" class="btn btn-info"> Play Again</button>
+                                <div id="playerControls">
+                                    <div class="form-group" id="betForm">
+                                        <label for="betAmount">Bet Amount:</label>
+                                        <input style="width:75px" type="number" id="betAmount" name="points" step="5">
+                                    </div>
+                                    <button id="betBtn" class="btn btn-success">Raise!</button>
+                                    <button id="callBtn" class="btn btn-primary">Call!</button>
+                                    <button id="foldBtn" class="btn btn-danger">Fold!</button>
+                                    <button id="allInBtn" class="btn btn-warning">All in!</button>
+                                    <button id="checkBtn" class="btn btn-primary">Check!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <hr>
+      </div>
+    </main>
+
+    <footer class="container">
+      <p>&copy; Lauren Mihalik 2018 Ramapo College Senior Project</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src = "/socket.io/socket.io.js"></script>
+   
+    <script>
+    $('#playAgainBtn').hide();
+    $('#playerControls').hide();
+    $('#waitingRoom').hide();
+
+    var socket = io();
+    var playerId = null;
+    var playerName = "";
+
+    socket.on('leaveRoom',function(data) {
+        $('#waitingRoom').hide();
+        $('#gameBoard').show();
+    });
+
+    socket.on('setPlayerId',function(data) {
+        playerId = data.socketId;
+        $('#playerId').text(playerId);     
+    });
+
+    socket.on('goToWaitRoom',function(data) {
+        $('#gameBoard').hide();
+        $('#waitingRoom').show();
+    });
+
+    socket.on('receiveCards', function(data){
+        $('#playerCards').empty();
+        card1 = '<img style="max-height:125px" src="./poker-cards/'+ data.cards[0].image+'" />';
+        card2 = '<img style="max-height:125px" src="./poker-cards/'+ data.cards[1].image+'" />';
+        $('#playerCards').append(card1);
+        $('#playerCards').append(card2);
+    });
+
+    socket.on('activeTurn',function(data) {
+        $('#betAmount').removeAttr("disabled");
+        $('#betBtn').removeAttr("disabled");
+        $('#callBtn').removeAttr("disabled");
+        $('#foldBtn').removeAttr("disabled");
+        $('#checkBtn').removeAttr("disabled");
+        $('#allInBtn').removeAttr("disabled");
+    });
+
+    socket.on('updateMessage',function(data) {
+        $("#messageBox").text(data.message);
+    });
+
+    socket.on('noCheckControls',function(data) {
+        $('#betAmount').removeAttr("disabled");
+        $('#betBtn').removeAttr("disabled");
+        $('#callBtn').removeAttr("disabled");
+        $('#foldBtn').removeAttr("disabled");
+        $('#allInBtn').removeAttr("disabled");
+        $('#checkBtn').attr("disabled","disabled");
+    });
+
+    socket.on('noCallControls',function(data) {
+        $('#betAmount').removeAttr("disabled");
+        $('#betBtn').removeAttr("disabled");
+        $('#checkBtn').removeAttr("disabled");
+        $('#foldBtn').removeAttr("disabled");
+        $('#allInBtn').removeAttr("disabled");
+        $('#callBtn').attr("disabled","disabled");
+    });
+
+    socket.on('updateTable', function(data){
+        $('#tableCards').empty();
+        $('#playerControls').show();
+        
+        for(var i=0; i < data.pokerTable.tableCards.length; i++){
+            card = '<img style="max-height:125px" src="./poker-cards/'+ data.pokerTable.tableCards[i].image+'" />';
+            $('#tableCards').append(card);     
+        }
+        $('#tablePot').text('$'+data.pokerTable.pot);
+        var playerInd = 0;
+        //get this player index
+        for(var i = 0; i < data.pokerTable.players.length; i++){
+            if(data.pokerTable.players[i].playerId == playerId){
+                playerInd = i;
+                $('#currentPlayer>div>div.card-body>#playerChips').text(data.pokerTable.players[i].chipCount);
+                $('#playerCards').empty();
+                if(data.pokerTable.players[i].folded == true){
+                    card1 = '<img style="opacity:0.3; max-height:125px" src="./poker-cards/'+ data.pokerTable.players[i].cards[0].image+'" />';
+                    card2 = '<img style="opacity:0.3; max-height:125px" src="./poker-cards/'+ data.pokerTable.players[i].cards[1].image+'" />';
+                }else{
+                    card1 = '<img style="max-height:125px" src="./poker-cards/'+ data.pokerTable.players[i].cards[0].image+'" />';
+                    card2 = '<img style="max-height:125px" src="./poker-cards/'+ data.pokerTable.players[i].cards[1].image+'" />';
+                }
+                $('#playerCards').append(card1);
+                $('#playerCards').append(card2);
+            }
+        }
+        var positionInd = playerInd;
+        for(var index=1; index<data.pokerTable.players.length; index++){
+            positionInd++;
+            if( positionInd >= data.pokerTable.players.length){
+                //pokerTable.activePlayerIndex=0;
+                positionInd=0;
+            }
+            $('#player' + index + '>div>div#playingCards').empty();
+            if(data.showCards == false){
+                if(data.pokerTable.players[positionInd].folded == true){
+                    card = '<img style="opacity:0.3; max-height:125px" src="./poker-cards/playing_card_back.png" />';
+                }else{
+                    card = '<img style="max-height:125px" src="./poker-cards/playing_card_back.png" />';
+                }
+                $('#player' + index + '>div>div#playingCards').append(card);
+                $('#player' + index + '>div>div#playingCards').append(card);
+            }else{
+                if(data.pokerTable.players[positionInd].folded == true){
+                    card1 = '<img style="opacity:0.3; max-height:125px" src="./poker-cards/playing_card_back.png" />';
+                    card2 = '<img style="opacity:0.3; max-height:125px" src="./poker-cards/playing_card_back.png" />';
+                }else{
+                    card1 = '<img style="max-height:125px" src="./poker-cards/'+ data.pokerTable.players[positionInd].cards[0].image +'" />';
+                    card2 = '<img style="max-height:125px" src="./poker-cards/'+ data.pokerTable.players[positionInd].cards[1].image +'" />';
+                }
+                $('#player' + index + '>div>div#playingCards').append(card1);
+                $('#player' + index + '>div>div#playingCards').append(card2);
+                $('#betAmount').attr("disabled","disabled");
+                $('#betBtn').attr("disabled","disabled");
+                $('#callBtn').attr("disabled","disabled");
+                $('#foldBtn').attr("disabled","disabled");
+                $('#checkBtn').attr("disabled","disabled");
+                $('#allInBtn').attr("disabled","disabled");
+                $('#playAgainBtn').show();
+            }
+            $('#player' + index + '>div>div.card-body>#playerName').text(data.pokerTable.players[positionInd].playerName);
+            $('#player' + index + '>div>div.card-body>#playerChips').text('$' + data.pokerTable.players[positionInd].chipCount);
+        }
+    });
+    </script>
+
+    <script>
+    $( "#evalBtn" ).click(function() {
+        socket.emit('evaluateHands',{playerId: playerId});
+    });
+    $( "#readyBtn" ).click(function() {
+        playerName = $("#playerNameInput").val();
+        numComputers = $("#numComps").val(); 
+        socket.emit('simReady',{playerId: playerId, playerName: playerName, numComputers:numComputers});
+        $('#currentPlayer>div>div.card-body>#playerName').text(playerName)
+        $("#readyBtn").hide();
+        $("#playerNameForm").hide();
+        $("#playerNameInput").val('');
+        $('#betAmount').attr("disabled","disabled");
+        $('#betBtn').attr("disabled","disabled");
+        $('#callBtn').attr("disabled","disabled");
+        $('#foldBtn').attr("disabled","disabled");
+        $('#checkBtn').attr("disabled","disabled");
+        $('#allInBtn').attr("disabled","disabled");
+        $("#messageBox").text("You're Ready to Play! Waiting on other Players");
+    });
+
+    $( "#playAgainBtn" ).click(function() {
+        socket.emit('simAgain',{playerId: playerId});
+        $("#playAgainBtn").hide();
+        $('#betAmount').attr("disabled","disabled");
+        $('#betBtn').attr("disabled","disabled");
+        $('#callBtn').attr("disabled","disabled");
+        $('#foldBtn').attr("disabled","disabled");
+        $('#checkBtn').attr("disabled","disabled");
+        $('#allInBtn').attr("disabled","disabled");
+    });
+
+    $( "#callBtn" ).click(function() {
+        socket.emit('Call', {playerId: playerId});
+        $('#betAmount').attr("disabled","disabled");
+        $('#betBtn').attr("disabled","disabled");
+        $('#callBtn').attr("disabled","disabled");
+        $('#foldBtn').attr("disabled","disabled");
+        $('#checkBtn').attr("disabled","disabled");
+        $('#allInBtn').attr("disabled","disabled");
+    });
+
+    $( "#foldBtn" ).click(function() {
+        socket.emit('Fold', {playerId: playerId});
+        $('#betAmount').attr("disabled","disabled");
+        $('#betBtn').attr("disabled","disabled");
+        $('#callBtn').attr("disabled","disabled");
+        $('#foldBtn').attr("disabled","disabled");
+        $('#checkBtn').attr("disabled","disabled");
+        $('#allInBtn').attr("disabled","disabled");
+    });
+
+    $( "#betBtn" ).click(function() {
+        var chipAmount = $("#betAmount").val();
+        if(chipAmount!="" && parseInt(chipAmount) > 0){
+            socket.emit('Raise', {playerId: playerId, chipAmount:chipAmount});
+            $('#betAmount').attr("disabled","disabled");
+            $('#betBtn').attr("disabled","disabled");
+            $('#callBtn').attr("disabled","disabled");
+            $('#foldBtn').attr("disabled","disabled");
+            $('#checkBtn').attr("disabled","disabled");
+            $('#allInBtn').attr("disabled","disabled");
+        }else{
+            $("#messageBox").text("You must set a bet amount!");
+        }
+    });
+
+    $( "#allInBtn" ).click(function() {
+        socket.emit('AllIn', {playerId: playerId});
+        $('#betAmount').attr("disabled","disabled");
+        $('#betBtn').attr("disabled","disabled");
+        $('#callBtn').attr("disabled","disabled");
+        $('#foldBtn').attr("disabled","disabled");
+        $('#checkBtn').attr("disabled","disabled");
+        $('#allInBtn').attr("disabled","disabled");
+    });
+
+    $( "#checkBtn" ).click(function() {
+        socket.emit('Check', {playerId: playerId});
+        $('#betAmount').attr("disabled","disabled");
+        $('#betBtn').attr("disabled","disabled");
+        $('#callBtn').attr("disabled","disabled");
+        $('#foldBtn').attr("disabled","disabled");
+        $('#checkBtn').attr("disabled","disabled");
+        $('#allInBtn').attr("disabled","disabled");
+    });
+
+    </script>
+</body>
+</html>

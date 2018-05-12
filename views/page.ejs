@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Poker Game</title>
+   </head>
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+   <script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+      var socket = io();
+      var playerId = null;
+      socket.on('newclientconnect',function(data) {
+         //document.body.innerHTML = '';
+         document.write(data.description);
+      });
+      socket.on('setPlayerId',function(data) {
+        //document.body.innerHTML = '';
+        console.log(data.socketId);
+        playerId = data.socketId;
+        $('#playerId').text(playerId);
+                
+      });
+      socket.on('receiveCards', function(data){
+        $('#playerCards').text(data.cards);
+              console.log(data.cards);
+            });
+
+      socket.on('activeTurn',function(data) {
+        
+        $('#betAmount').removeAttr("disabled");
+        $('#betBtn').removeAttr("disabled");
+        $('#callBtn').removeAttr("disabled");
+        $('#foldBtn').removeAttr("disabled");
+        $('#checkBtn').removeAttr("disabled");
+        $('#allInBtn').removeAttr("disabled");
+        
+      });
+
+      socket.on('updateTable', function(data){
+        $('#tableCards').text(data.tableCards);
+        
+              console.log(data.tableCards);
+            });
+   </script>
+
+  
+
+   <body>
+
+   
+  
+
+     <h1>Poker Game</h1>
+     <h2 id= "playerId"> </h2>
+
+     <button id="readyBtn"> Ready to Play </button>
+
+     <p>Table Cards:</p>
+     <h2 id="tableCards"> </h2>
+     <h2 id="tableChips"> </h2>
+   
+     <input type="number" id="betAmount" name="points" step="5">
+     <button id="betBtn">Raise!</button>
+     <button id="callBtn">Call!</button>
+     <button id="foldBtn">Fold!</button>
+     <button id="allInBtn">All in!</button>
+     <button id="checkBtn">Check!</button>
+
+     <h2 id="playerCards"></h2>
+
+   </body>
+</html>
+
+<script>
+    $( "#readyBtn" ).click(function() {
+      console.log("Player is ready!" );
+      console.log("Player " + playerId + " is ready!" );
+      
+      socket.emit('playerReady',{playerId: playerId});
+
+      $("#readyBtn").hide();
+
+      $('#betAmount').attr("disabled","disabled");
+      $('#betBtn').attr("disabled","disabled");
+      $('#callBtn').attr("disabled","disabled");
+      $('#foldBtn').attr("disabled","disabled");
+      $('#checkBtn').attr("disabled","disabled");
+      $('#allInBtn').attr("disabled","disabled");
+      
+      
+    });
+
+    $( "#callBtn" ).click(function() {
+      socket.emit('Call', {playerId: playerId});
+      $('#betAmount').attr("disabled","disabled");
+      $('#betBtn').attr("disabled","disabled");
+      $('#callBtn').attr("disabled","disabled");
+      $('#foldBtn').attr("disabled","disabled");
+      $('#checkBtn').attr("disabled","disabled");
+      $('#allInBtn').attr("disabled","disabled");
+    });
+
+    $( "#foldBtn" ).click(function() {
+      socket.emit('Fold', {playerId: playerId});
+      
+      $('#betAmount').attr("disabled","disabled");
+      $('#betBtn').attr("disabled","disabled");
+      $('#callBtn').attr("disabled","disabled");
+      $('#foldBtn').attr("disabled","disabled");
+      $('#checkBtn').attr("disabled","disabled");
+      $('#allInBtn').attr("disabled","disabled");
+    });
+
+    $( "#betBtn" ).click(function() {
+      socket.emit('Raise', {playerId: playerId});
+      
+      $('#betAmount').attr("disabled","disabled");
+      $('#betBtn').attr("disabled","disabled");
+      $('#callBtn').attr("disabled","disabled");
+      $('#foldBtn').attr("disabled","disabled");
+      $('#checkBtn').attr("disabled","disabled");
+      $('#allInBtn').attr("disabled","disabled");
+    });
+
+    $( "#allInBtn" ).click(function() {
+      socket.emit('AllIn', {playerId: playerId});
+      
+      $('#betAmount').attr("disabled","disabled");
+      $('#betBtn').attr("disabled","disabled");
+      $('#callBtn').attr("disabled","disabled");
+      $('#foldBtn').attr("disabled","disabled");
+      $('#checkBtn').attr("disabled","disabled");
+      $('#allInBtn').attr("disabled","disabled");
+    });
+    
+    $( "#checkBtn" ).click(function() {
+      socket.emit('Check', {playerId: playerId});
+      
+      $('#betAmount').attr("disabled","disabled");
+      $('#betBtn').attr("disabled","disabled");
+      $('#callBtn').attr("disabled","disabled");
+      $('#foldBtn').attr("disabled","disabled");
+      $('#checkBtn').attr("disabled","disabled");
+      $('#allInBtn').attr("disabled","disabled");
+    });
+
+   </script>
